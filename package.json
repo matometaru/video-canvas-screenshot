@@ -1,0 +1,31 @@
+{
+  "name": "react-video-screenshot",
+  "version": "1.0.0",
+  "description": "Take a screenshot of the video for React.",
+  "main": "index.js",
+  "engines": {
+    "node": ">= 16"
+  },
+  "scripts": {
+    "dev": "npm run dev -w examples",
+    "build": "tsc && vite build",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/react": "^18.2.33",
+    "@types/react-dom": "^18.2.14",
+    "@vitejs/plugin-react-swc": "^3.4.0",
+    "typescript": "^5.2.2",
+    "vite": "^4.5.0"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "workspaces": [
+    "examples"
+  ]
+}
