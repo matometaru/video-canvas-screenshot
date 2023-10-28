@@ -1,9 +1,6 @@
-type Props = {
-}
-
 export const captureElementScreenshot = (
   element: HTMLVideoElement | HTMLCanvasElement,
-  onCapture: (imageData: string) => void
+  onCapture: (imageData: string) => void,
 ): void => {
   let canvas: HTMLCanvasElement;
   
@@ -15,8 +12,6 @@ export const captureElementScreenshot = (
     canvas.width = element.videoWidth;
     canvas.height = element.videoHeight;
 
-    console.log("hey")
-
     const ctx = canvas.getContext('2d');
     if (ctx) {
       ctx.drawImage(element, 0, 0, canvas.width, canvas.height);
@@ -26,9 +21,44 @@ export const captureElementScreenshot = (
     return;
   }
 
-  // 画像データを取得
   const imageData = canvas.toDataURL('image/png');
-
-  // コールバック関数に画像データを渡す
   onCapture(imageData);
 };
+
+export const captureWebGLCanvasScreenshot = (
+  canvas: HTMLCanvasElement,
+  onCapture: (imageData: string) => void,
+) => {
+  const newCanvas = document.createElement("canvas")
+  let animationFrameId: number;
+  let previousImageData: ImageData | null = null;
+
+  const { width, height } = canvas;
+  newCanvas.width = width;
+  newCanvas.height = height;
+
+  async function copyCanvasContent() {
+    if (canvas && newCanvas) {
+      const ctx = newCanvas.getContext('2d');
+      if (ctx) {
+        ctx.drawImage(canvas, 0, 0);
+        const imageData = ctx.getImageData(0, 0, width, height);
+        if (previousImageData === null) {
+          previousImageData = imageData;
+        } else if (
+          !imageData.data.every((value, index) => value === previousImageData?.data[index])
+        ) {
+          cancelAnimationFrame(animationFrameId);
+          const base64 = newCanvas.toDataURL('image/jpeg');
+          onCapture(base64);
+          return;
+        }
+      }
+      animationFrameId = requestAnimationFrame(copyCanvasContent);
+    };
+  }
+
+  copyCanvasContent()
+}
+
+
