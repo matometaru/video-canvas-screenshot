@@ -4,9 +4,13 @@ export const captureElementScreenshot = (
 ): void => {
   let canvas: HTMLCanvasElement;
   
-  // 引数として渡されたelementがHTMLCanvasElementかHTMLVideoElementかを判定
   if (element instanceof HTMLCanvasElement) {
     canvas = element;
+    const contextWebgl = element.getContext('webgl2') || element.getContext('webgl') || element.getContext('experimental-webgl')
+    if (contextWebgl) {
+      captureWebGLCanvasScreenshot(element, onCapture)
+      return;
+    }
   } else if (element instanceof HTMLVideoElement) {
     canvas = document.createElement('canvas');
     canvas.width = element.videoWidth;
@@ -25,7 +29,7 @@ export const captureElementScreenshot = (
   onCapture(imageData);
 };
 
-export const captureWebGLCanvasScreenshot = (
+const captureWebGLCanvasScreenshot = (
   canvas: HTMLCanvasElement,
   onCapture: (imageData: string) => void,
 ) => {

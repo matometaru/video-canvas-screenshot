@@ -1,7 +1,7 @@
 import './ThreeAnimation.css'
 
 import { useState, useEffect } from 'react'
-import { captureElementScreenshot, captureWebGLCanvasScreenshot } from '../../../src'
+import { captureElementScreenshot } from '../../../src'
 
 export default function MediaStreamVideo() {
   const [base64Image, setBase64Image] = useState<string>('');
@@ -34,9 +34,8 @@ export default function MediaStreamVideo() {
 
   const handleCapture = () => {
     const canvasRef = document.querySelector('canvas') as HTMLCanvasElement;
-    // console.log(canvasRef);
     if (canvasRef) {
-      captureWebGLCanvasScreenshot(canvasRef, (imageData) => {
+      captureElementScreenshot(canvasRef, (imageData) => {
         setBase64Image(imageData);
         console.log("hey", imageData);
       });

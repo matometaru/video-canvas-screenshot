@@ -1,7 +1,7 @@
 import './MediaStreamVideo.css'
 
 import { useEffect, useRef, useState } from 'react'
-import { captureElementScreenshot, captureWebGLCanvasScreenshot } from '../../../src'
+import { captureElementScreenshot } from '../../../src'
 
 const constraints: MediaStreamConstraints = {
   video: {
@@ -64,7 +64,7 @@ export default function MediaStreamVideo() {
 
   const handleCapture = () => {
     if (canvasRef.current) {
-      captureWebGLCanvasScreenshot(canvasRef.current, (imageData) => {
+      captureElementScreenshot(canvasRef.current, (imageData) => {
         setBase64Image(imageData);
       });
     }
