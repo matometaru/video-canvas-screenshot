@@ -1,15 +1,25 @@
 {
   "name": "video-canvas-screenshot",
   "version": "1.0.0",
-  "description": "Take a screenshot of the video for React.",
-  "main": "index.js",
+  "description": "Take a screenshot of the video and canvas.",
+  "main": "./dist/index.umd.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/types/index.d.ts",
+  "files": ["dist"],
+  "exports": {
+    ".": {
+      "types": "./dist/types/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.umd.js"
+    }
+  },
   "engines": {
     "node": ">= 16"
   },
   "scripts": {
     "dev": "npm run dev -w examples",
     "build": "tsc && vite build",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "prepare": "npm run build"
   },
   "keywords": [],
   "author": "",
