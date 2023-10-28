@@ -1,5 +1,5 @@
 {
-  "name": "video-screenshot",
+  "name": "video-canvas-screenshot",
   "version": "1.0.0",
   "description": "Take a screenshot of the video for React.",
   "main": "index.js",
