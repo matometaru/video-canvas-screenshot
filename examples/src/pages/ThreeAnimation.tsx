@@ -33,11 +33,10 @@ export default function MediaStreamVideo() {
   }, [])
 
   const handleCapture = () => {
-    const canvasRef = document.querySelector('canvas') as HTMLCanvasElement;
-    if (canvasRef) {
-      captureElementScreenshot(canvasRef, (imageData) => {
+    const canvasElement = document.querySelector('canvas') as HTMLCanvasElement;
+    if (canvasElement) {
+      captureElementScreenshot(canvasElement, (imageData) => {
         setBase64Image(imageData);
-        console.log("hey", imageData);
       });
     }
   };
