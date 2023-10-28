@@ -48,7 +48,6 @@ export default function MediaStreamVideo() {
       { base64Image && (
         <img src={base64Image} alt="" />
       )}
-      {JSON.stringify(base64Image)}
     </div>
   );
 }
