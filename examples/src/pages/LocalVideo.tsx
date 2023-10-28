@@ -16,7 +16,7 @@ export default function LocalVideo() {
   return (
     <div>
       <video ref={videoRef} controls>
-        <source src="/assets/mov_bbb.mp4" type="video/mp4" />
+        <source src="./mov_bbb.mp4" type="video/mp4" />
       </video>
       { base64Image && (
         <img src={base64Image} alt="" />
