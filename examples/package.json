@@ -11,10 +11,11 @@
   "devDependencies": {
     "@types/react": "^18.2.33",
     "@types/react-dom": "^18.2.14",
-    "@vitejs/plugin-react-swc": "^3.0.1",
-    "vite": "4.0.3"
+    "@vitejs/plugin-react-swc": "^3.4.0",
+    "vite": "^4.0.3"
   },
   "scripts": {
-    "dev": "vite"
+    "dev": "vite",
+    "build": "tsc && vite build"
   }
 }

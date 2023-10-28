@@ -22,6 +22,7 @@
   },
   "scripts": {
     "dev": "npm run dev -w examples",
+    "build:examples": "npm run build -w examples",
     "build": "tsc && vite build",
     "prepare": "npm run build"
   },

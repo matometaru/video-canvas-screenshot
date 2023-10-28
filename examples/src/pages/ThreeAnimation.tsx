@@ -14,7 +14,7 @@ export default function MediaStreamVideo() {
     renderer.setSize(window.innerWidth, window.innerHeight);
 
     const container = document.getElementById('myCanvas');
-    container.appendChild(renderer.domElement);
+    container!.appendChild(renderer.domElement);
     const geometry = new THREE.BoxGeometry();
     const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
     const cube = new THREE.Mesh(geometry, material);

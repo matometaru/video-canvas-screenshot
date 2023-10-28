@@ -6,7 +6,7 @@
     "moduleResolution": "node",
     "jsx": "react-jsx",
     "types": ["react"],
-    "typeRoots": ["node_modules/@types", "src/types"],
+    "typeRoots": ["../node_modules/@types", "src/types"],
     "strict": true,
     "exactOptionalPropertyTypes": true,
     "esModuleInterop": true,
