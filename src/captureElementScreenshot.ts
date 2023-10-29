@@ -38,14 +38,13 @@ const captureWebGLCanvasScreenshot = (
   type: CanvasImageFormat,
 ) => {
   const newCanvas = document.createElement("canvas")
-  let animationFrameId: number;
   let previousImageData: ImageData | null = null;
 
   const { width, height } = canvas;
   newCanvas.width = width;
   newCanvas.height = height;
 
-  async function copyCanvasContent() {
+  function copyCanvasContent() {
     if (canvas && newCanvas) {
       const ctx = newCanvas.getContext('2d');
       if (ctx) {
@@ -56,13 +55,12 @@ const captureWebGLCanvasScreenshot = (
         } else if (
           !imageData.data.every((value, index) => value === previousImageData?.data[index])
         ) {
-          cancelAnimationFrame(animationFrameId);
           const base64 = newCanvas.toDataURL(type);
           onCapture(base64);
           return;
         }
       }
-      animationFrameId = requestAnimationFrame(copyCanvasContent);
+      requestAnimationFrame(copyCanvasContent);
     };
   }
 
