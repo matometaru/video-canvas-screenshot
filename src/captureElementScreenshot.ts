@@ -1,6 +1,9 @@
+type CanvasImageFormat = "image/png" | "image/jpeg" | "image/webp";
+
 export const captureElementScreenshot = (
   element: HTMLVideoElement | HTMLCanvasElement,
   onCapture: (imageData: string) => void,
+  type: CanvasImageFormat = 'image/jpeg',
 ): void => {
   let canvas: HTMLCanvasElement;
   
@@ -8,7 +11,7 @@ export const captureElementScreenshot = (
     canvas = element;
     const contextWebgl = element.getContext('webgl2') || element.getContext('webgl') || element.getContext('experimental-webgl')
     if (contextWebgl) {
-      captureWebGLCanvasScreenshot(element, onCapture)
+      captureWebGLCanvasScreenshot(element, onCapture, type)
       return;
     }
   } else if (element instanceof HTMLVideoElement) {
@@ -25,13 +28,14 @@ export const captureElementScreenshot = (
     return;
   }
 
-  const imageData = canvas.toDataURL('image/png');
+  const imageData = canvas.toDataURL(type);
   onCapture(imageData);
 };
 
 const captureWebGLCanvasScreenshot = (
   canvas: HTMLCanvasElement,
   onCapture: (imageData: string) => void,
+  type: CanvasImageFormat,
 ) => {
   const newCanvas = document.createElement("canvas")
   let animationFrameId: number;
@@ -53,7 +57,7 @@ const captureWebGLCanvasScreenshot = (
           !imageData.data.every((value, index) => value === previousImageData?.data[index])
         ) {
           cancelAnimationFrame(animationFrameId);
-          const base64 = newCanvas.toDataURL('image/jpeg');
+          const base64 = newCanvas.toDataURL(type);
           onCapture(base64);
           return;
         }
